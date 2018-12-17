@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in services.
+        autoconfigure: true # Automatically registers services based on their signature (event subscribers).
+        public: true        # Make all services public to make them accessible using "$container->get()".
+        bind:
+            # pass 'db' service as argument when services waits for DBmysql
+            DBmysql: '@db'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Barcode\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Event.php}'
